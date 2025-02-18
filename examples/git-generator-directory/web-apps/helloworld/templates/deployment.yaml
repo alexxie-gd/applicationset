@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helloworld-chart.fullname" . }}
+  name: {{ include "helloworld.fullname" . }}
   labels:
-    {{- include "helloworld-chart.labels" . | nindent 4 }}
+    {{- include "helloworld.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "helloworld-chart.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/name: {{ include "helloworld.name" . }}
   template:
     metadata:
       labels:
-        {{- include "helloworld-chart.selectorLabels" . | nindent 8 }}
+        {{- include "helloworld.labels" . | nindent 8 }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
