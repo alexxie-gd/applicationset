@@ -1,0 +1,23 @@
+replicaCount: 1
+
+image:
+  repository: k8s.gcr.io/echoserver
+  tag: "1.4"
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  annotations: {}
+  hosts:
+    - host: chart-example.local
+      paths: []
+  tls: []
+
+resources: {}
+nodeSelector: {}
+tolerations: []
+affinity: {}
