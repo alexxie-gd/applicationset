@@ -1,18 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helloworld.fullname" . }}
+  name: {{ (split "-" .Chart.Name)._0 }}
   labels:
-    {{- include "helloworld.labels" . | nindent 4 }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/name: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "helloworld.name" . }}
+      app.kubernetes.io/name: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        {{- include "helloworld.labels" . | nindent 8 }}
+        app.kubernetes.io/name: {{ .Release.Name }}
     spec:
       containers:
         - name: {{ .Chart.Name }}
